@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{ useState } from 'react';
+import LoginForm from './conponents/LoginForm';
+import WriteForm from './conponents/WriteForm';
 
-function App() {
+const App = () => {
+  const[page, setPage] = useState(0)
+
+  const onPage = (num) => {
+    setPage(num)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      { page === 0 && <WriteForm onPage={ onPage } /> }
+      { page === 1 && <LoginForm onPage={ onPage } /> }
     </div>
   );
-}
+};
 
 export default App;

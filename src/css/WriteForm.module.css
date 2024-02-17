@@ -1,0 +1,121 @@
+.write_container {
+    margin : 100px auto;
+    border : 1px solid red;
+    width : 400px;
+    height : 400px;
+}
+.write_container h3 {
+    text-align : center;
+    margin-top : 30px;
+}
+.name_div {
+    margin : 0 auto;
+    width : 300px;
+    display : flex;
+    text-align : center;
+    margin-top: 40px;
+}
+.name_div p {
+    flex-direction: row;
+    margin-left: 15px;
+}
+.name_div input {
+    width : 200px;
+    height : 25px;
+    margin-left: 15px;
+    margin-top : 10px;
+}
+.id_div {
+    margin : 0 auto;
+    width : 300px;
+    display : flex;
+    margin-top : 20px;
+}
+.id_div p {
+    flex-direction: row;
+    margin-left: 10px;
+}
+.id_div input {
+    width : 200px;
+    height : 25px;
+    margin-left: 15px;
+    margin-top : 10px;
+}
+.pwd_div {
+    margin : 0 auto;
+    width : 300px;
+    display : flex;
+    margin-top : 20px;
+}
+.pwd_div p {
+    flex-direction: row;
+}
+.pwd_div input {
+    width : 200px;
+    height : 25px;
+    margin-left: 15px;
+    margin-top : 10px;
+}
+.btn_div {
+    margin: 0 auto;
+    width: 300px;
+    height : 30px;
+    margin-top : 40px;
+    text-align: center;
+}
+.reset {
+    margin-left: 15px;
+}
+/*---------LoginForm---------*/
+.login_container {
+    margin : 100px auto;
+    border : 1px solid red;
+    width : 400px;
+    height : 300px;
+}
+.login_container h3 {
+    text-align : center;
+    margin-top : 30px;
+}
+.id_div {
+    margin : 0 auto;
+    width : 300px;
+    display : flex;
+    margin-top : 20px;
+}
+.id_div p {
+    flex-direction: row;
+    margin-left: 10px;
+}
+.id_div input {
+    width : 200px;
+    height : 25px;
+    margin-left: 15px;
+    margin-top : 10px;
+}
+.pwd_div {
+    margin : 0 auto;
+
+    width : 300px;
+    display : flex;
+    margin-top : 20px;
+}
+.pwd_div p {
+    flex-direction: row;
+}
+.pwd_div input {
+    width : 200px;
+    height : 25px;
+    margin-left: 15px;
+    margin-top : 10px;
+}
+.btn_div {
+    margin: 0 auto;
+    width: 300px;
+    height : 30px;
+    margin-top : 40px;
+    text-align: center;
+}
+.reset {
+    margin-left: 15px;
+}
