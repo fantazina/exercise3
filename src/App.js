@@ -3,16 +3,16 @@ import LoginForm from './conponents/LoginForm';
 import WriteForm from './conponents/WriteForm';
 
 const App = () => {
-  const[page, setPage] = useState(0)
+  const[formPage, setFormPage] = useState(0)
 
-  const onPage = (num) => {
-    setPage(num)
+  const onFormPage = (num) => {
+    setFormPage(num)
   }
 
   return (
     <div>
-      { page === 0 && <WriteForm onPage={ onPage } /> }
-      { page === 1 && <LoginForm onPage={ onPage } /> }
+      { formPage === 0 && <WriteForm onFormPage={ onFormPage } /> }
+      { formPage === 1 && <LoginForm onFormPage={ onFormPage } /> }
     </div>
   );
 };

@@ -21,7 +21,10 @@ const LoginForm = () => {
     }
 
     const onReset = () => {
-        setLoginDTO('')
+        setLoginDTO({
+            id : '',
+            pwd : ''
+        })
     }
 
     return (
