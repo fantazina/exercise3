@@ -10,7 +10,6 @@ const JoinForm = ({onFormPage}) => {
         pwd_re : ''
     })
 
-    // const[joinError, setJoinError] = useState(true)
     const[nameError, setNameError] = useState('')
     const[idError, setIdError] = useState('')
     const[pwdError, setPwdError] = useState('')
@@ -24,16 +23,21 @@ const JoinForm = ({onFormPage}) => {
         }) 
 
         if(name === 'id') { // 아이디가 빈값이 아닐 시 중복체크 하기
-           onIsExistId(value) // valuer값 보내기
-        }
-        if(name === 'name') {
+           onIsExistId(value) // value값 보내기
+
+        } else if(name === 'name') {
             setNameError('')
-        }
-        if(name === 'pwd') {
+
+        } else if(name === 'pwd') {
             setPwdError('')
-        }
-        if(name === 'pwd_re') {
-            setPwd_reError('')
+
+        } else if (name === 'pwd_re') {
+            if (value !== userDTO.pwd) {
+                setPwd_reError('비밀번호를 다시 입력하세요.')
+                
+            } else {
+                setPwd_reError('');
+            }
         }
     }
 
@@ -43,11 +47,9 @@ const JoinForm = ({onFormPage}) => {
              .then(res => {
                 if(res.data === 'non_exist') {
                     setIdError('');
-                    return false
 
                 } else {
                     setIdError('이미 사용 중인 아이디');
-                    return true
                 }
             })
     }
@@ -79,9 +81,9 @@ const JoinForm = ({onFormPage}) => {
             setPwdError('')
         }
 
-        if(!userDTO.pwd_re) {
+        if(userDTO.pwd_re !== userDTO.pwd) {
             setPwd_reError('비밀번호를 다시 입력하세요.')
-            sw = 0
+           sw = 0
 
         } else {
             setPwd_reError('')
@@ -103,7 +105,7 @@ const JoinForm = ({onFormPage}) => {
 
                     } else {
                         alert('회원가입 실패!..')
-                        setIdError('사용 불가능')
+                        setIdError('이미 사용 중인 아이디')
                     }
                 })
         }
@@ -116,6 +118,10 @@ const JoinForm = ({onFormPage}) => {
             pwd :'',
             pwd_re :''
         })
+        setNameError('')
+        setIdError('')
+        setPwd_reError('')
+        setPwdError('')
     }
 
     return (
@@ -152,6 +158,7 @@ const JoinForm = ({onFormPage}) => {
             <div className={ styles.btn_div }>
                 <button onClick={ onJoinSubmit }>회원가입</button>
                 <button className={ styles.reset } onClick={ onReset }>취소</button>
+                <button className={ styles.login } onClick={ () => onFormPage(1) }>로그인</button>
             </div>
         </div>
     );

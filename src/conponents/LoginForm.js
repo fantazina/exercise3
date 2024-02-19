@@ -21,11 +21,11 @@ const LoginForm = ({onFormPage}) => {
         else {
             setIdError('')
         }
-        if(!userDTO.pwd){
-            setPwdError('비밀번호를 입력하세요.')
-            sw = 0
-        }
-        else {
+        if(!userDTO.pwd) {
+            setPwdError('비밀번호를 다시 입력하세요.')
+           sw = 0
+
+        } else {
             setPwdError('')
         }
 
@@ -49,6 +49,19 @@ const LoginForm = ({onFormPage}) => {
             ...userDTO,
             [name] : value
         })
+        if(name === 'id') {
+            setIdError('')
+ 
+        } else if(name === 'pwd') {
+            setPwdError('')
+
+            if (value !== userDTO.pwd) {
+                setPwdError('비밀번호를 다시 입력하세요.')
+                
+            } else {
+                setPwdError('');
+            }
+         }
     }
 
     const onReset = (e) => {
@@ -56,6 +69,8 @@ const LoginForm = ({onFormPage}) => {
             id : '',
             pwd : ''
         })
+        setIdError('')
+        setPwdError('')
     }
 
     return (
@@ -65,17 +80,20 @@ const LoginForm = ({onFormPage}) => {
                 <p>Id</p>
                 <input onChange={ onInput } name='id' type='text' value={ userDTO.id } />
             </div>
+
             <div className={ Lstyles.check } >{idError}</div>
 
             <div className={ Lstyles.pwd_div }>
                 <p>Pwd</p>
                 <input onChange={ onInput } name='pwd' type='password' value={ userDTO.pwd } />
             </div>
+
             <div className={ Lstyles.check } >{pwdError}</div>
 
             <div className={ Lstyles.btn_div }>
                 <button onClick={ onLoginSubmit }>로그인</button>
                 <button onClick={ onReset } className={ Lstyles.reset }>취소</button>
+                <button onClick={ () => onFormPage(0) } className={ Lstyles.back }>뒤로</button>
             </div>
         </div>
     );

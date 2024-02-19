@@ -25,6 +25,11 @@
     height : 25px;
     margin-left: 15px;
     margin-top : 10px;
+
+}
+.name_div input:focus {
+    border : 2px solid lightblue; 
+    outline: none;
 }
 .id_div {
     margin : 0 auto;
@@ -42,6 +47,10 @@
     margin-left: 15px;
     margin-top : 10px;
 }
+.id_div input:focus {
+    border : 2px solid lightblue; 
+    outline: none;
+}
 .pwd_div {
     margin : 0 auto;
     width : 300px;
@@ -56,6 +65,10 @@
     height : 25px;
     margin-left: 15px;
     margin-top : 10px;
+}
+.pwd_div input:focus {
+    border : 2px solid lightblue; 
+    outline: none;
 }
 .pwdre_div {
     margin : 0 auto;
@@ -72,6 +85,10 @@
     margin-left: 15px;
     margin-top : 10px;
 }
+.pwdre_div input:focus {
+    border : 2px solid lightblue; 
+    outline: none;
+}
 .btn_div {
     margin: 0 auto;
     width: 300px;
@@ -79,7 +96,24 @@
     text-align: center;
     margin-top : 40px;
 }
+.btn_div button {
+    border : none; 
+    background-color: rightgray;
+    height : 25px;
+    font-weight: bold;
+    transition : 0.4s;
+    border-radius: 5px !important;
+    cursor : pointer;
+}
+.btn_div button:hover {
+    background-color: lightblue;
+    color: blanchedalmond;
+    transition : 0.4s;
+}
 .reset {
+    margin-left: 15px;
+}
+.login {
     margin-left: 15px;
 }
 /*---------유효성검사----------*/
@@ -117,6 +151,10 @@
     margin-left: 15px;
     margin-top : 10px;
 }
+.id_div input:focus {
+    border : 2px solid lightblue; 
+    outline: none;
+}
 .pwd_div {
     margin : 0 auto;
     width : 300px;
@@ -132,6 +170,10 @@
     margin-left: 15px;
     margin-top : 10px;
 }
+.pwd_div input:focus {
+    border : 2px solid lightblue; 
+    outline: none;
+}
 .btn_div {
     margin: 0 auto;
     width: 300px;
@@ -139,7 +181,24 @@
     margin-top : 25px;
     text-align: center;
 }
+.btn_div button {
+    border : none; 
+    background-color: rightgray;
+    height : 25px;
+    font-weight: bold;
+    transition : 0.4s;
+    border-radius: 5px !important;
+    cursor : pointer;
+}
 .reset {
+    margin-left: 15px;
+}
+.btn_div button:hover {
+    background-color: lightblue;
+    color: blanchedalmond;
+    transition : 0.4s;
+}
+.back {
     margin-left: 15px;
 }
 /*---------유효성검사----------*/
