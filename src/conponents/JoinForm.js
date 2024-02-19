@@ -9,7 +9,8 @@ const JoinForm = ({onFormPage}) => {
         pwd : '',
         pwd_re : ''
     })
-    const[joinError, setJoinError] = useState(true)
+
+    // const[joinError, setJoinError] = useState(true)
     const[nameError, setNameError] = useState('')
     const[idError, setIdError] = useState('')
     const[pwdError, setPwdError] = useState('')
@@ -21,8 +22,18 @@ const JoinForm = ({onFormPage}) => {
             ...userDTO,
             [name] : value
         }) 
-        if(name === 'id') { // 아이디 변경시 아이디 중복체크 하기
-            onIsExistId(value) // valuer값 보내기
+
+        if(name === 'id') { // 아이디가 빈값이 아닐 시 중복체크 하기
+           onIsExistId(value) // valuer값 보내기
+        }
+        if(name === 'name') {
+            setNameError('')
+        }
+        if(name === 'pwd') {
+            setPwdError('')
+        }
+        if(name === 'pwd_re') {
+            setPwd_reError('')
         }
     }
 
@@ -30,17 +41,20 @@ const JoinForm = ({onFormPage}) => {
     const onIsExistId = (id) => { // 매개변수로 id값을 받어
         axios.get(`http://localhost:8080/user/isExistId/${id}`)
              .then(res => {
-                setIdError(res.data === 'non_exist' ? '사용 가능' : '사용 불가능')
-                setJoinError(res.data === 'non_exist' ? false : true)
+                if(res.data === 'non_exist') {
+                    setIdError('');
+                    return false
+
+                } else {
+                    setIdError('이미 사용 중인 아이디');
+                    return true
+                }
             })
-             .catch(error => console.log(error))
     }
 
     const onJoinSubmit = (e) => {
-
         var sw = 1
 
-        
         if(!userDTO.name) {
             setNameError('이름을 입력하세요.')
             sw = 0 
@@ -51,14 +65,6 @@ const JoinForm = ({onFormPage}) => {
         
         if(!userDTO.id) {
             setIdError('아이디를 입력하세요.')
-            sw = 0
-            
-        } else {
-            setIdError('')
-        }
-
-        if(joinError) {
-            setIdError('중복된 아이디입니다.')
             sw = 0
 
         } else {
@@ -82,22 +88,27 @@ const JoinForm = ({onFormPage}) => {
         }
 
         if(sw === 1) {
-            axios.post(`http://localhost:8080/user/write`, userDTO)
-                 .then(() => {
+            // 아이디 중복 검사
+            axios.get(`http://localhost:8080/user/isExistId/${userDTO.id}`)
+                .then(res => {
+                    if (res.data === 'non_exist') {
 
-                     alert('회원가입을 축하합니다.')
-                     onFormPage(1)
+                        // 중복이 없으면 회원가입 요청
+                        axios.post(`http://localhost:8080/user/write`, userDTO)
+                            .then(() => {
+                                alert('회원가입을 축하합니다.')
+                                onFormPage(1)
 
-                    }).catch(error => {
-                        alert('회원가입 실패');
-                        onFormPage(0);
-                    });
-                } else {
-                    alert('아이디를 확인하세요.')
-                    onFormPage(0)
-                }
+                            })
+
+                    } else {
+                        alert('회원가입 실패!..')
+                        setIdError('사용 불가능')
+                    }
+                })
+        }
     }
-
+    
     const onReset = () => {
         setUserDTO({
             name : '',
@@ -112,26 +123,30 @@ const JoinForm = ({onFormPage}) => {
             <h3>회원가입</h3>
             <div className={ styles.name_div }>
                 <p>이름</p>
-                <input name='name' onChange={ onInput } type='text' value={ userDTO.name }/>
+                <input name='name' onChange={ onInput } type='text' value={ userDTO.name } />
             </div>
+            
             <div className={styles.check}>{nameError}</div>
 
             <div className={ styles.id_div }>
                 <p>Id</p>
                 <input name='id' onChange={ onInput } type='text' value={ userDTO.id } />
             </div>
+
             <div className={styles.check}>{idError}</div>
 
             <div className={ styles.pwd_div }> 
                 <p>Pwd</p>
                 <input name='pwd' onChange={ onInput } type='password' value={ userDTO.pwd } />
             </div>
+
             <div className={styles.check}>{pwdError}</div>
 
             <div className={ styles.pwdre_div }> 
                 <p>Pwd 확인</p>
                 <input name='pwd_re' onChange={ onInput } type='password' value={ userDTO.pwd_re } />
             </div>
+
             <div className={styles.check}>{pwd_reError}</div>
 
             <div className={ styles.btn_div }>

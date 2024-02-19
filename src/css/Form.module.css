@@ -87,6 +87,7 @@
     color: red;
     font-size: 14px;
     margin-left : 120px;
+    margin-top: -5px;
 }
 /*---------LoginForm---------*/
 .login_container {
@@ -146,4 +147,5 @@
     color: red;
     font-size: 14px;
     margin-left : 120px;
+    margin-top: -5px;
 }
