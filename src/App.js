@@ -1,4 +1,5 @@
 import React,{ useState } from 'react';
+import JoinForm from './conponents/JoinForm';
 import LoginForm from './conponents/LoginForm';
 import WriteForm from './conponents/WriteForm';
 
@@ -11,8 +12,9 @@ const App = () => {
 
   return (
     <div>
-      { formPage === 0 && <WriteForm onFormPage={ onFormPage } /> }
+      { formPage === 0 && <JoinForm onFormPage={ onFormPage } /> }
       { formPage === 1 && <LoginForm onFormPage={ onFormPage } /> }
+      { formPage === 2 && <WriteForm onFormPage={ onFormPage } /> }
     </div>
   );
 };

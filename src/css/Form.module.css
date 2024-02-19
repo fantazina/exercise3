@@ -33,6 +33,7 @@
 }
 .id_div p {
     flex-direction: row;
+    margin-left : 5px;
 }
 .id_div input {
     width : 200px;
@@ -101,11 +102,11 @@
     margin : 0 auto;
     width : 300px;
     display : flex;
-    margin-top : 20px;
+    margin-top : 10px;
 }
 .id_div p {
     flex-direction: row;
-    margin-left: 10px;
+    margin-left: 35px;
 }
 .id_div input {
     width : 200px;
@@ -115,10 +116,9 @@
 }
 .pwd_div {
     margin : 0 auto;
-
     width : 300px;
     display : flex;
-    margin-top : 20px;
+    margin-top : 10px;
 }
 .pwd_div p {
     flex-direction: row;
@@ -133,9 +133,15 @@
     margin: 0 auto;
     width: 300px;
     height : 30px;
-    margin-top : 40px;
+    margin-top : 25px;
     text-align: center;
 }
 .reset {
     margin-left: 15px;
+}
+/*---------유효성검사----------*/
+.check {
+    color: red;
+    font-size: 14px;
+    margin-left : 120px;
 }

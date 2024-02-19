@@ -1,27 +1,60 @@
-import React, { useEffect, useState } from 'react';
-import Lstyles from '../css/WriteForm.module.css';
+import React, { useState } from 'react';
+import Lstyles from '../css/Form.module.css';
 import axios from 'axios';
 
-const LoginForm = () => {
-    const[loginDTO, setLoginDTO] = useState({
+const LoginForm = ({onFormPage}) => {
+    const[userDTO, setUserDTO] = useState({
         id : '',
         pwd : ''
     })
 
-    useEffect(() => {
-        axios.get(`http://localhost:8080/write/getUserDTO`)
-    }, [])
+    const[idError, setIdError] = useState('');
+    const[pwdError, setPwdError] = useState('');
+
+    const onLoginSubmit = (e) => {
+        e.preventDefault()
+
+        var sw = 1
+
+        if(!userDTO.id){
+            setIdError('아이디 입력')
+            sw = 0
+        }
+        else {
+            setIdError('')
+        }
+        if(!userDTO.pwd){
+            setPwdError('비밀번호 입력')
+            sw = 0
+        }
+        else {
+            setPwdError('')
+        }
+
+        if(sw === 1) {
+            axios.post(`http://localhost:8080/user/login`, {
+                params : {
+                    id : userDTO.id,
+                    pwd : userDTO.pwd
+                }
+            }).then(() => {
+                alert('로그인 완료')
+                onFormPage(2)
+
+            }).catch(error => alert('error'))                
+        }
+    }
 
     const onInput = (e) => {
         const {name, value} = e.target
-        setLoginDTO({
-            ...loginDTO,
+        setUserDTO({
+            ...userDTO,
             [name] : value
         })
     }
 
-    const onReset = () => {
-        setLoginDTO({
+    const onReset = (e) => {
+        setUserDTO({
             id : '',
             pwd : ''
         })
@@ -31,17 +64,19 @@ const LoginForm = () => {
         <div className={ Lstyles.login_container }>
             <h3>로그인</h3>
             <div className={ Lstyles.id_div }>
-                <p>아이디</p>
-                <input onChange={ onInput } type='text' value={ loginDTO.id } />
+                <p>Id</p>
+                <input onChange={ onInput } name='id' type='text' value={ userDTO.id } />
             </div>
+            <div className={ Lstyles.check } >{idError}</div>
 
             <div className={ Lstyles.pwd_div }>
-                <p>비밀번호</p>
-                <input onChange={ onInput } type='password' value={ loginDTO.pwd } />
+                <p>Pwd</p>
+                <input onChange={ onInput } name='pwd' type='password' value={ userDTO.pwd } />
             </div>
+            <div className={ Lstyles.check } >{pwdError}</div>
 
             <div className={ Lstyles.btn_div }>
-                <button>로그인</button>
+                <button onClick={ onLoginSubmit }>로그인</button>
                 <button onClick={ onReset } className={ Lstyles.reset }>취소</button>
             </div>
         </div>
