@@ -21,22 +21,21 @@ const JoinForm = ({onFormPage}) => {
             ...userDTO,
             [name] : value
         }) 
-        if(name === 'id') {
-            onIsExistId()
+        if(name === 'id') { // 아이디 변경시 아이디 중복체크 하기
+            onIsExistId(value) // valuer값 보내기
         }
     }
 
     //아이디 중복체크
-    const onIsExistId = () => {
-        axios.get(`https://localhost:8080/user/isExistId?id=${userDTO.id}`)
+    const onIsExistId = (id) => { // 매개변수로 id값을 받어
+        axios.get(`http://localhost:8080/user/isExistId/${id}`)
              .then(res => {
-              setIdError(res.data === 'non_exist' ? '사용 가능' : '사용 불가능')
+                setIdError(res.data === 'non_exist' ? '사용 가능' : '사용 불가능')
             })
              .catch(error => console.log(error))
     }
 
     const onWriteSubmit = (e) => {
-        e.preventDefault()
 
         var sw = 1
 
@@ -66,22 +65,12 @@ const JoinForm = ({onFormPage}) => {
         }
 
         if(sw === 1){
-            axios.post(`https://localhost8080/user/write`, {
-                params : {
-                    name : userDTO.name, // name으로 가능,
-                    id : userDTO.id,
-                    pwd : userDTO.pwd,
-                }
-            }).then(
-                alert('회원가입을 축하합니다.')
-                )
-                .then(
-                onFormPage(1)
-                
-                )
-            // .catch(error => {
-            //     alert('회원가입에 실패하였습니다.')
-            // })
+            axios.post(`http://localhost:8080/user/write`, userDTO )
+                 .then(() => {
+
+                     alert('회원가입을 축하합니다.')
+                     onFormPage(1)
+                    }).catch(error => alert('회원가입 실패'))
           }
     }
 
@@ -97,7 +86,6 @@ const JoinForm = ({onFormPage}) => {
     return (
         <div className={ styles.write_container }>
             <h3>회원가입</h3>
-
             <div className={ styles.name_div }>
                 <p>이름</p>
                 <input name='name' onChange={ onInput } type='text' value={ userDTO.name }/>

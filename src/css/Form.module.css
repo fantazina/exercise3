@@ -1,8 +1,9 @@
 .write_container {
     margin : 100px auto;
-    border : 1px solid red;
+    border : 1px solid whitesmoke;
     width : 400px;
     height : 470px;
+    box-shadow : 0 0 6px rgba(0, 0, 0, 0.2);
 }
 .write_container h3 {
     text-align : center;
@@ -33,7 +34,7 @@
 }
 .id_div p {
     flex-direction: row;
-    margin-left : 5px;
+    margin-left: 15px;
 }
 .id_div input {
     width : 200px;
@@ -60,7 +61,7 @@
     margin : 0 auto;
     width : 300px;
     display : flex;
-    margin-top : 20px;
+    margin-top : 10px;
 }
 .pwdre_div p {
     flex-direction: row;
@@ -90,9 +91,10 @@
 /*---------LoginForm---------*/
 .login_container {
     margin : 100px auto;
-    border : 1px solid red;
+    border : 1px solid whitesmoke;
     width : 400px;
     height : 300px;
+    box-shadow : 0 0 6px rgba(0, 0, 0, 0.2);
 }
 .login_container h3 {
     text-align : center;

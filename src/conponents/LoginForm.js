@@ -12,19 +12,17 @@ const LoginForm = ({onFormPage}) => {
     const[pwdError, setPwdError] = useState('');
 
     const onLoginSubmit = (e) => {
-        e.preventDefault()
-
         var sw = 1
 
         if(!userDTO.id){
-            setIdError('아이디 입력')
+            setIdError('아이디를 입력하세요.')
             sw = 0
         }
         else {
             setIdError('')
         }
         if(!userDTO.pwd){
-            setPwdError('비밀번호 입력')
+            setPwdError('비밀번호를 입력하세요.')
             sw = 0
         }
         else {
