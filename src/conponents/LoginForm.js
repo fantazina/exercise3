@@ -30,18 +30,18 @@ const LoginForm = ({onFormPage}) => {
         }
 
         if(sw === 1) {
-            axios.post(`http://localhost:8080/user/login`, {
-                params : {
-                    id : userDTO.id,
-                    pwd : userDTO.pwd
+            axios.post(`http://localhost:8080/user/login`, userDTO)
+            .then(res => {   
+                if (res.data.login) {
+                    alert('로그인 성공')
+                    onFormPage(2)
+                } else {
+                    setPwdError('비밀번호를 다시 입력하세요.')
                 }
-            }).then(() => {
-                alert('로그인 완료')
-                onFormPage(2)
-
-            }).catch(error => alert('error'))                
-        }
+            })
+         }
     }
+
 
     const onInput = (e) => {
         const {name, value} = e.target
@@ -53,14 +53,14 @@ const LoginForm = ({onFormPage}) => {
             setIdError('')
  
         } else if(name === 'pwd') {
-            setPwdError('')
-
-            if (value !== userDTO.pwd) {
-                setPwdError('비밀번호를 다시 입력하세요.')
-                
-            } else {
-                setPwdError('');
-            }
+            axios.post(`http://localhost:8080/user/login`,{ id : userDTO.id , pwd : value })
+            .then(res => {   
+                if (res.data.login) {
+                    setPwdError('');
+                } else {
+                    setPwdError('비밀번호를 다시 입력하세요.')
+                }
+            })
          }
     }
 
